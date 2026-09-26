@@ -1,0 +1,37 @@
+{
+  "consumers": [
+    {
+      "repo": "streamos",
+      "worktree": "main",
+      "plugin": "anti-slop",
+      "dest": "tools/oxlint/anti-slop"
+    },
+    {
+      "repo": "tooee",
+      "worktree": "main",
+      "plugin": "anti-slop",
+      "dest": "tools/oxlint/anti-slop",
+      "notes": "Drops effect/ and adds no-react-global-namespace inside anti-slop. That rule now lives in react-idioms."
+    },
+    {
+      "repo": "effect-ink",
+      "worktree": "main",
+      "plugin": "anti-slop",
+      "dest": "tools/oxlint/anti-slop"
+    },
+    {
+      "repo": "streamsy",
+      "worktree": "effect",
+      "plugin": "anti-slop",
+      "dest": "tools/oxlint/anti-slop",
+      "notes": "Streamsy main has no Oxlint plugins. The effect line carries them. Its copy is oxfmt-formatted."
+    },
+    {
+      "repo": "streamsy",
+      "worktree": "effect-tag-lint",
+      "plugin": "effect-idioms",
+      "dest": "tools/oxlint/effect-idioms",
+      "notes": "Unmerged branch. Move this entry to the effect worktree when effect-tag-lint merges."
+    }
+  ]
+}

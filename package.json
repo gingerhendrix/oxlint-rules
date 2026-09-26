@@ -11,7 +11,7 @@
     "format:check": "oxfmt . --check",
     "test": "bun run test:rules && bun run test:scripts",
     "test:rules": "node --test 'plugins/**/*.test.ts'",
-    "test:scripts": "bun test test/",
+    "test:scripts": "bun test ./test/scripts",
     "vendor": "bun scripts/vendor.ts",
     "check-vendor": "bun scripts/check-vendor.ts"
   },
