@@ -1,0 +1,25 @@
+{
+  "name": "oxlint-rules",
+  "private": true,
+  "description": "Canonical source for Gareth's custom Oxlint rules. Consumer repositories vendor copies from here.",
+  "type": "module",
+  "scripts": {
+    "check": "bun run typecheck && bun run lint && bun run format:check && bun run test",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint .",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "test": "bun run test:rules && bun run test:scripts",
+    "test:rules": "node --test 'plugins/**/*.test.ts'",
+    "test:scripts": "bun test test/",
+    "vendor": "bun scripts/vendor.ts",
+    "check-vendor": "bun scripts/check-vendor.ts"
+  },
+  "devDependencies": {
+    "@oxlint/plugins": "1.85.0",
+    "@types/bun": "latest",
+    "oxfmt": "0.70.0",
+    "oxlint": "1.85.0",
+    "typescript": "^5.9.3"
+  }
+}
