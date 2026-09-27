@@ -7,6 +7,19 @@
       "dest": "tools/oxlint/anti-slop"
     },
     {
+      "repo": "streamos",
+      "worktree": "main",
+      "plugin": "effect-idioms",
+      "dest": "tools/oxlint/effect-idioms"
+    },
+    {
+      "repo": "streamos",
+      "worktree": "ts-idioms-unknown-parameters",
+      "plugin": "ts-idioms",
+      "dest": "tools/oxlint/ts-idioms",
+      "notes": "Unmerged branch. Move this entry to the main worktree when ts-idioms-unknown-parameters merges."
+    },
+    {
       "repo": "tooee",
       "worktree": "main",
       "plugin": "anti-slop",
