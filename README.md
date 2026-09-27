@@ -11,10 +11,16 @@ Consumers own their rule severity, scopes, and exceptions. They do not own the r
 | `anti-slop`     | 15 generic rules, plus `effect/` with `no-service-constructor-imports`       | Dillon Mulroy's `dmmulroy/anti-slop` at `6d53855`, unchanged |
 | `effect-idioms` | `no-tag-comparison`, `no-tag-switch`, `no-tag-destructure`, `no-tag-literal` | Streamsy `531d95bf`                                          |
 | `react-idioms`  | `no-react-global-namespace`                                                  | Tooee `9a95fda`                                              |
+| `ts-idioms`     | `no-unknown-parameters`, with an `allowedNames` option                       | Adapted from `dmmulroy/anti-slop` at `6d53855` (MIT)         |
 
 `plugins/anti-slop/` stays byte-identical to one upstream commit. See
 [`plugins/anti-slop/UPSTREAM.md`](plugins/anti-slop/UPSTREAM.md). Put Personal rules in another
 plugin folder.
+
+`ts-idioms/no-unknown-parameters` is a Personal copy of the `anti-slop` rule with one change. Its
+`allowedNames` option lets a consumer exempt catch-helper names such as `error` and `err`. The
+name match is weak on purpose (lint-debt decision D9). Remove the copy when upstream gets an
+equal option. See [`plugins/ts-idioms/README.md`](plugins/ts-idioms/README.md).
 
 ## Vendor a plugin into a repository
 
