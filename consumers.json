@@ -45,6 +45,18 @@
       "plugin": "effect-idioms",
       "dest": "tools/oxlint/effect-idioms",
       "notes": "Unmerged branch. Move this entry to the effect worktree when effect-tag-lint merges."
+    },
+    {
+      "repo": "streamsy-extras",
+      "worktree": "main",
+      "plugin": "anti-slop",
+      "dest": "tools/oxlint/anti-slop"
+    },
+    {
+      "repo": "streamsy-extras",
+      "worktree": "main",
+      "plugin": "effect-idioms",
+      "dest": "tools/oxlint/effect-idioms"
     }
   ]
 }
