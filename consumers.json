@@ -14,10 +14,9 @@
     },
     {
       "repo": "streamos",
-      "worktree": "ts-idioms-unknown-parameters",
+      "worktree": "main",
       "plugin": "ts-idioms",
-      "dest": "tools/oxlint/ts-idioms",
-      "notes": "Unmerged branch. Move this entry to the main worktree when ts-idioms-unknown-parameters merges."
+      "dest": "tools/oxlint/ts-idioms"
     },
     {
       "repo": "tooee",
@@ -41,10 +40,9 @@
     },
     {
       "repo": "streamsy",
-      "worktree": "effect-tag-lint",
+      "worktree": "effect",
       "plugin": "effect-idioms",
-      "dest": "tools/oxlint/effect-idioms",
-      "notes": "Unmerged branch. Move this entry to the effect worktree when effect-tag-lint merges."
+      "dest": "tools/oxlint/effect-idioms"
     },
     {
       "repo": "streamsy-extras",
