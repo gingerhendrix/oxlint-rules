@@ -11,15 +11,23 @@ copy with `bun run vendor ts-idioms <repo>`.
 
 This rule is a copy of `anti-slop/no-unknown-parameters` from Dillon Mulroy's
 [`dmmulroy/anti-slop`](https://github.com/dmmulroy/anti-slop) at commit
-`6d538555cb151d4121ed51a27db81890eacf8ae9`, under the MIT license in [`LICENSE`](LICENSE).
-The copy keeps the `6d53855` behaviour, with one change: the `allowedNames` option replaces the
+`c44ef22ca116d0ba62a3ff663a0bd13a3f3fa40b`, under the MIT license in [`LICENSE`](LICENSE).
+The copy keeps the `c44ef22` behaviour, with one change: the `allowedNames` option replaces the
 fixed `cause` exemption. With the default option the rule reports the same parameters as the
-`anti-slop` rule. A consumer turns `anti-slop/no-unknown-parameters` off when it turns this rule
-on.
+`anti-slop` rule at the commit in [`../anti-slop/UPSTREAM.md`](../anti-slop/UPSTREAM.md). A
+consumer turns `anti-slop/no-unknown-parameters` off when it turns this rule on.
 
-The copy does not take the newer upstream changes. Those exempt type-predicate subjects
-(`value: unknown): value is T`) and report `unknown` inside unions (`string | unknown`). Take
-them when `plugins/anti-slop` moves to a newer upstream commit.
+The `c44ef22` behaviour differs from the first copy (`6d53855`) in three ways:
+
+- It reports `unknown` inside a union or parentheses, for example `value: string | unknown`.
+- It skips the subject of a type predicate or assertion, for example
+  `isString(value: unknown): value is string`.
+- It names a destructured parameter by its binding only. `{ value }: unknown = {}` reports
+  `{ value }`.
+
+The copy inlines the upstream helpers from `src/shared/function-parameters.ts`, so the plugin
+has no import from `anti-slop`. When `plugins/anti-slop` moves to a newer upstream commit,
+compare the upstream rule and helper with this file and take the changes.
 
 StreamOS uses the option for catch helpers:
 

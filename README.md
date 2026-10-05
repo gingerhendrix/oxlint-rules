@@ -11,7 +11,7 @@ Consumers own their rule severity, scopes, and exceptions. They do not own the r
 | `anti-slop`     | 18 generic rules, plus `effect/` with 5 Effect rules                         | Dillon Mulroy's `dmmulroy/anti-slop` at `c44ef22`, unchanged |
 | `effect-idioms` | `no-tag-comparison`, `no-tag-switch`, `no-tag-destructure`, `no-tag-literal` | Streamsy `531d95bf`                                          |
 | `react-idioms`  | `no-react-global-namespace`                                                  | Tooee `9a95fda`                                              |
-| `ts-idioms`     | `no-unknown-parameters`, with an `allowedNames` option                       | Adapted from `dmmulroy/anti-slop` at `6d53855` (MIT)         |
+| `ts-idioms`     | `no-unknown-parameters`, with an `allowedNames` option                       | Adapted from `dmmulroy/anti-slop` at `c44ef22` (MIT)         |
 
 `plugins/anti-slop/` stays byte-identical to one upstream commit. See
 [`plugins/anti-slop/UPSTREAM.md`](plugins/anti-slop/UPSTREAM.md). Put Personal rules in another

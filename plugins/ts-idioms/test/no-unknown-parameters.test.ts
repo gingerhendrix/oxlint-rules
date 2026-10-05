@@ -11,9 +11,15 @@ function reported(parameter: string) {
 ruleTester.run("no-unknown-parameters (default options)", noUnknownParametersRule, {
   valid: [
     "function enrich(cause: unknown): void {}",
+    "function enrich(cause: Error | unknown): void {}",
     "function parse(value: string | number): void {}",
-    // Upstream 6d53855 does not look inside unions. Newer upstream does. This copy keeps 6d53855.
-    "function enrich(value: string | unknown): void {}",
+    // Type-predicate and assertion subjects are exempt (upstream c44ef22).
+    "function isString(value: unknown): value is string { return true; }",
+    "const isString = (value: unknown): value is string => true;",
+    "function assertString(value: unknown): asserts value is string {}",
+    "type Guard = (value: unknown) => value is string;",
+    "declare function isString(value: unknown): value is string;",
+    "type Guards = { isString(value: unknown): value is string };",
   ],
   invalid: [
     {
@@ -37,14 +43,23 @@ ruleTester.run("no-unknown-parameters (default options)", noUnknownParametersRul
       errors: reported("err"),
     },
     {
-      // Upstream 6d53855 does not exempt type-predicate subjects. Newer upstream does.
-      code: "function isString(value: unknown): value is string { return true; }",
+      // `unknown` absorbs every union member, so a union with `unknown` is reported (upstream c44ef22).
+      code: "function parse(value: string | unknown): void {}",
       errors: reported("value"),
     },
     {
-      // 6d53855 names a destructured parameter with a default by its full source text.
+      code: "function parse(value: string | (number | unknown)): void {}",
+      errors: reported("value"),
+    },
+    {
+      // Only the predicate subject is exempt. Other unknown parameters are still reported.
+      code: "function isString(value: unknown, context: unknown): value is string { return true; }",
+      errors: reported("context"),
+    },
+    {
+      // A destructured parameter is named by its binding only, without the annotation or default.
       code: "export function parse({ value }: unknown = {}): void {}",
-      errors: reported("{ value }: unknown = {}"),
+      errors: reported("{ value }"),
     },
   ],
 });
@@ -83,6 +98,12 @@ ruleTester.run("no-unknown-parameters (catch-helper names)", noUnknownParameters
       code: "class Failure { constructor(readonly error: unknown) {} }",
       options: catchHelpers,
     },
+    { code: "function report(error: Error | unknown): void {}", options: catchHelpers },
+    {
+      // The predicate exemption does not depend on the option.
+      code: "function isFailure(value: unknown): value is Error { return true; }",
+      options: catchHelpers,
+    },
   ],
   invalid: [
     {
@@ -116,6 +137,11 @@ ruleTester.run("no-unknown-parameters (catch-helper names)", noUnknownParameters
     },
     {
       code: "function read(value: unknown = null): void {}",
+      options: catchHelpers,
+      errors: reported("value"),
+    },
+    {
+      code: "function render(value: string | unknown, error: unknown): void {}",
       options: catchHelpers,
       errors: reported("value"),
     },
