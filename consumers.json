@@ -22,8 +22,13 @@
       "repo": "tooee",
       "worktree": "main",
       "plugin": "anti-slop",
-      "dest": "tools/oxlint/anti-slop",
-      "notes": "Drops effect/ and adds no-react-global-namespace inside anti-slop. That rule now lives in react-idioms."
+      "dest": "tools/oxlint/anti-slop"
+    },
+    {
+      "repo": "tooee",
+      "worktree": "main",
+      "plugin": "react-idioms",
+      "dest": "tools/oxlint/react-idioms"
     },
     {
       "repo": "effect-ink",
