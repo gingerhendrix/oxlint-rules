@@ -18,5 +18,18 @@ ruleTester.run("no-tag-switch", noTagSwitchRule, {
       code: 'function toResponse(error) { switch (error["_tag"]) { default: return 500; } }',
       errors: [{ messageId: "tagSwitch" }],
     },
+    {
+      // Upstream anti-slop no-manual-effect-error-tag: a switch in a catch handler wants catchTags.
+      code: 'Effect.catchIf(isRetryable, (error) => { switch (error._tag) { case "NotFound": return recover; } });',
+      errors: [{ messageId: "errorHandlerSwitch" }],
+    },
+    {
+      code: 'Effect.catch((error) => { switch (error.reason._tag) { case "RateLimit": return retry; } });',
+      errors: [{ messageId: "reasonHandlerSwitch" }],
+    },
+    {
+      code: 'Effect.mapError((error) => { switch (error._tag) { case "NotFound": return gone(error); } });',
+      errors: [{ messageId: "tagSwitch" }],
+    },
   ],
 });

@@ -25,7 +25,32 @@ ruleTester.run("no-tag-comparison", noTagComparisonRule, {
     {
       // packages/projection/src/watch.ts
       code: 'Effect.mapError((cause) => (cause._tag === "StreamGone" ? gone(cause) : other(cause)));',
-      errors: [{ messageId: "errorHandler", data: { tag: "StreamGone", guard: "" } }],
+      errors: [{ messageId: "mappingHandler", data: { tag: "StreamGone", guard: "" } }],
+    },
+    {
+      code: 'Effect.tapError((error) => error._tag === "Timeout" ? log(error) : Effect.void);',
+      errors: [{ messageId: "mappingHandler", data: { tag: "Timeout", guard: "" } }],
+    },
+    {
+      code: 'Effect.catchAll((error) => error._tag === "NotFound" ? recover : fail);',
+      errors: [{ messageId: "errorHandler", data: { tag: "NotFound", guard: "" } }],
+    },
+    {
+      code: 'Effect.orElse(function (error) { return error._tag === "Gone" ? fallback : fail(error); });',
+      errors: [{ messageId: "errorHandler", data: { tag: "Gone", guard: "" } }],
+    },
+    {
+      // Upstream anti-slop no-manual-effect-error-tag: a nested reason wants catchReason.
+      code: 'Effect.catchAll((error) => error.reason._tag === "RateLimit" ? retry : fail);',
+      errors: [{ messageId: "reasonHandler", data: { tag: "RateLimit", guard: "" } }],
+    },
+    {
+      code: 'Effect.catchTag("AiError", (error) => error["reason"]._tag === "RateLimit" ? retry : fail);',
+      errors: [{ messageId: "reasonHandler", data: { tag: "RateLimit", guard: "" } }],
+    },
+    {
+      code: 'Effect.mapError((error) => error.reason._tag === "RateLimit" ? slowDown(error) : error);',
+      errors: [{ messageId: "mappingHandler", data: { tag: "RateLimit", guard: "" } }],
     },
     {
       // examples/issue-tracker/server/app.ts

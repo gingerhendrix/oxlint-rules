@@ -12,6 +12,11 @@ ruleTester.run("no-tag-literal", noTagLiteralRule, {
     'expect(body).toMatchObject({ _tag: "BadRequest" });',
     'expect(outcome).toEqual({ results: [{ _tag: "Created" }] });',
     "class Fault extends Data.TaggedError('Fault')<{ readonly detail: string }> {}",
+    // Upstream anti-slop no-manual-tagged-construction: Match patterns describe a tag.
+    'Match.when({ _tag: "Ready" }, handleReady);',
+    'Match.not({ "_tag": "Pending" }, handleOther);',
+    'Match.whenOr({ _tag: "A" }, { _tag: "B" }, handleEither);',
+    'Match.when({ cause: { _tag: "Timeout" } }, retry);',
   ],
   invalid: [
     {
@@ -37,6 +42,14 @@ ruleTester.run("no-tag-literal", noTagLiteralRule, {
     {
       code: 'const quoted = { "_tag": "Rows" };',
       errors: [{ messageId: "tagLiteral", data: { tag: "Rows" } }],
+    },
+    {
+      code: 'Matcher.when({ _tag: "Ready" }, handleReady);',
+      errors: [{ messageId: "tagLiteral", data: { tag: "Ready" } }],
+    },
+    {
+      code: 'Match.when(isReady, () => ({ _tag: "Ready" }));',
+      errors: [{ messageId: "tagLiteral", data: { tag: "Ready" } }],
     },
     {
       code: 'class Rejected { readonly _tag = "Rejected" as const; }',
