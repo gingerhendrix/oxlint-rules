@@ -87,6 +87,6 @@ second repository wants it, or when you want this repository's tests and history
 
 ## Oxlint versions
 
-This repository tests with `oxlint` and `@oxlint/plugins` 1.85.0. Consumers pin their own pair:
-StreamOS and Tooee use 1.85.0, Effect Ink uses 1.80.0, and Streamsy uses 1.78.0. The tests here
+This repository tests with `oxlint` and `@oxlint/plugins` 1.87.0, and formats with `oxfmt` 0.72.0.
+Consumers pin their own pair. Since 2026-10-06 every registered consumer uses 1.87.0. The tests here
 do not cover older Oxlint versions, so run the consumer's lint gate after each vendor run.
