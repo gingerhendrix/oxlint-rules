@@ -41,7 +41,7 @@
       "worktree": "effect",
       "plugin": "anti-slop",
       "dest": "tools/oxlint/anti-slop",
-      "notes": "Streamsy main has no Oxlint plugins. The effect line carries them. Its copy is oxfmt-formatted."
+      "notes": "Streamsy main has no Oxlint plugins. The effect line carries them."
     },
     {
       "repo": "streamsy",

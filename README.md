@@ -88,5 +88,7 @@ second repository wants it, or when you want this repository's tests and history
 ## Oxlint versions
 
 This repository tests with `oxlint` and `@oxlint/plugins` 1.87.0, and formats with `oxfmt` 0.72.0.
-Consumers pin their own pair. Since 2026-10-06 every registered consumer uses 1.87.0. The tests here
+Consumers pin their own pair. Tooee and Effect Ink use 1.87.0. StreamOS, Streamsy, and Streamsy
+Extras use 1.86.0, because `effect-tsgo patch --oxlint` in `@effect/tsgo` 0.48.1 supports Oxlint
+1.82.0 to 1.86.0 only. Move them to the newer version when `@effect/tsgo` supports it. The tests here
 do not cover older Oxlint versions, so run the consumer's lint gate after each vendor run.
